@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    <title>Logged Out- Taskmate.</title>
+{% endblock title %}
+
+{% block content %}
+    <div class="container">
+    </br>
+        <h4>Logged Out.</h4>
+        <a href="{% url 'login' %}">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Login again?</button>
+        </a>
+    </div>
+{% endblock content %}

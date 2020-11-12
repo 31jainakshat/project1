@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    <title>Welcome to Home Page.</title>
+{% endblock title %}
+
+{% block content %}
+    <div class="container">
+        <h1>{{ index_text }}</h1>
+        <center><a href="{% url 'register' %}"><button type="button" class ="btn btn-primary btn-lg mt-3">Let's get started!</button></center>
+    </div>
+{% endblock content %}

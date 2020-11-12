@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    <title>Welcome to Todolist Page.</title>
+{% endblock title %}
+
+{% block content %}
+    <div class="container">
+    </br>
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-info" role="alert">
+                {{ message }}
+                <button type="buttton" class="close" data-dismiss="alert" aria-label="close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endfor %}
+    {% endif %}
+    <form method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+            <input type="text" class="form-control" name="task" placeholder="New Task? Please type here.">
+        </div>
+        <button type="submit" class="btn btn-primary">Add Task</button>
+    </form>
+    </br>
+
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Task</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Edit</th>
+                    <th scope="col">Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% if all_tasks %}
+                {% for i in all_tasks %}
+                    {% if i.done %}
+                        </tr>
+                            <td>{{i.task }}</td>
+                            <td><a href="{% url 'pending_task' i.id %}">Mark this as a pending task</a></td>
+                            <td><a href="{% url 'edit_task' i.id %}">Edit</a></td>
+                            <td><a href="{% url 'delete_task' i.id %}">Delete</a></td>
+                        </tr>
+                    {% else %}
+                        </tr>
+                            <td>{{ i.task }}</td>
+                            <td><a href="{% url 'complete_task' i.id %}">Mark this as a completed task</a></td>
+                            <td><a href="{% url 'edit_task' i.id %}">Edit</a></td>
+                            <td><a href="{% url 'delete_task' i.id %}">Delete</a></td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+            </tbody>
+        </div>
+{% endblock content %}
